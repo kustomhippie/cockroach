@@ -1,0 +1,56 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: cockroach-selfsigned
+spec:
+  selfSigned: {}
+
+...
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+
+metadata:
+  name: cockroach-ca
+
+spec:
+  secretName: cockroach-ca
+
+  duration: 2880h
+  renewBefore: 360h
+
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+
+  isCA: true
+  usages:
+    - digital signature
+    - key encipherment
+
+  issuerRef:
+    name: cockroach-selfsigned
+    kind: Issuer
+    group: cert-manager.io
+
+  subject:
+    organizations:
+      - Cockroach
+
+  commonName: cockroach-ca
+
+...
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+
+metadata:
+  name: cockroach-ca
+
+spec:
+  ca:
+    secretName: cockroach-ca
+
+...

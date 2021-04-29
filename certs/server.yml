@@ -1,0 +1,39 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+
+metadata:
+  name: cockroach-server
+
+spec:
+  secretName: cockroach-server
+
+  duration: 2160h
+  renewBefore: 360h
+
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+    - client auth
+
+  issuerRef:
+    name: cockroach-ca
+    kind: Issuer
+    group: cert-manager.io
+
+  subject:
+    organizations:
+      - Cockroach
+
+  commonName: node
+  dnsNames:
+    - "localhost"
+    - "127.0.0.1"
+
+...

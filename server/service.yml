@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: cockroach-server
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+
+spec:
+  publishNotReadyAddresses: true
+
+  ports:
+    - name: http
+      port: 8080
+    - name: grpc
+      port: 26257
+
+...

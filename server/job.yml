@@ -1,0 +1,164 @@
+---
+apiVersion: batch/v1
+kind: Job
+
+metadata:
+  name: cockroach-init
+
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+
+      initContainers:
+        - name: certs
+          image: cockroach-init
+          imagePullPolicy: IfNotPresent
+
+          command:
+            - sh
+            - -c
+            - |
+              cp /client/* /certs/
+              chmod 0400 /certs/*.key
+
+          volumeMounts:
+            - name: certs
+              mountPath: /certs/
+            - name: secret
+              mountPath: /client/
+
+      containers:
+        - name: init
+          image: cockroach-server
+          imagePullPolicy: IfNotPresent
+
+          command:
+            - /cockroach/cockroach
+            - init
+            - --certs-dir=/cockroach/cockroach-certs/
+            - --host=cockroach-server-0.cockroach-server.$(NAMESPACE).svc.cluster.local
+
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+
+          volumeMounts:
+            - name: certs
+              mountPath: /cockroach/cockroach-certs/
+
+      volumes:
+        - name: certs
+          emptyDir: {}
+        - name: secret
+          projected:
+            sources:
+              - secret:
+                  name: cockroach-client
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+                      mode: 0400
+                    - key: tls.crt
+                      path: client.root.crt
+                      mode: 0400
+                    - key: tls.key
+                      path: client.root.key
+                      mode: 0400
+
+...
+---
+apiVersion: batch/v1
+kind: Job
+
+metadata:
+  name: cockroach-user
+
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+
+      initContainers:
+        - name: certs
+          image: cockroach-init
+          imagePullPolicy: IfNotPresent
+
+          command:
+            - sh
+            - -c
+            - |
+              cp /client/* /certs/
+              chmod 0400 /certs/*.key
+
+          volumeMounts:
+            - name: certs
+              mountPath: /certs/
+            - name: secret
+              mountPath: /client/
+
+      containers:
+        - name: user
+          image: cockroach-server
+          imagePullPolicy: IfNotPresent
+
+          command:
+            - /cockroach/cockroach
+            - sql
+            - --certs-dir=/cockroach/cockroach-certs/
+            - --host=cockroach-server-0.cockroach-server.$(NAMESPACE).svc.cluster.local
+            - --execute
+            - CREATE USER IF NOT EXISTS $(COCKROACH_USERNAME) WITH PASSWORD '$(COCKROACH_PASSWORD)'
+            - --execute
+            - CREATE DATABASE IF NOT EXISTS $(COCKROACH_DATABASE) ENCODING = 'UTF-8'
+            - --execute
+            - GRANT ALL ON DATABASE $(COCKROACH_DATABASE) TO $(COCKROACH_USERNAME)
+
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+
+            - name: COCKROACH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: cockroach-user
+                  key: username
+            - name: COCKROACH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cockroach-user
+                  key: password
+            - name: COCKROACH_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: cockroach-user
+                  key: database
+
+          volumeMounts:
+            - name: certs
+              mountPath: /cockroach/cockroach-certs/
+
+      volumes:
+        - name: certs
+          emptyDir: {}
+        - name: secret
+          projected:
+            sources:
+              - secret:
+                  name: cockroach-client
+                  items:
+                    - key: ca.crt
+                      path: ca.crt
+                      mode: 0400
+                    - key: tls.crt
+                      path: client.root.crt
+                      mode: 0400
+                    - key: tls.key
+                      path: client.root.key
+                      mode: 0400
+
+...
