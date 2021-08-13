@@ -11,10 +11,10 @@ commonLabels:
 
 images:
   - name: cockroach-init
-    newName: docker.io/webhippie/alpine
-    newTag: "3.10"
+    newName: webhippie/alpine
+    newTag: "3.14"
   - name: cockroach-server
-    newName: docker.io/cockroachdb/cockroach
+    newName: cockroachdb/cockroach
     newTag: "v20.2.8"
 
 ...
