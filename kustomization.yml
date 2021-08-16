@@ -11,7 +11,7 @@ commonLabels:
 
 images:
   - name: cockroach-init
-    newName: webhippie/alpine
+    newName: quay.io/webhippie/alpine
     newTag: "3.14"
   - name: cockroach-server
     newName: cockroachdb/cockroach
