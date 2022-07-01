@@ -12,7 +12,7 @@ commonLabels:
 images:
   - name: cockroach-init
     newName: quay.io/webhippie/alpine
-    newTag: "3.15"
+    newTag: "3.16"
   - name: cockroach-server
     newName: cockroachdb/cockroach
     newTag: "v22.1.2"
