@@ -15,6 +15,6 @@ images:
     newTag: "3.16"
   - name: cockroach-server
     newName: cockroachdb/cockroach
-    newTag: "v22.1.5"
+    newTag: "v22.1.6"
 
 ...
