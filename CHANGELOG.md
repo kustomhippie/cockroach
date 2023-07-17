@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0](https://github.com/kustomhippie/cockroach/compare/v1.0.3...v2.0.0) (2023-07-17)
+
+
+### Features
+
+* **major:** update actionhippie/kustomize action to v2 ([f00b9ae](https://github.com/kustomhippie/cockroach/commit/f00b9ae18ca63da7208727e1fbf42172eff7a890))
+
 ## [1.0.3](https://github.com/kustomhippie/cockroach/compare/v1.0.2...v1.0.3) (2023-07-10)
 
 
