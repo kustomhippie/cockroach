@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/kustomhippie/cockroach/compare/v2.0.3...v2.0.4) (2023-09-11)
+
+
+### Bugfixes
+
+* **deps:** update cockroachdb/cockroach docker tag to v23.1.9 ([325cecf](https://github.com/kustomhippie/cockroach/commit/325cecf8f8dcb33846bb194669b463dd31b75cf5))
+
 ## [2.0.3](https://github.com/kustomhippie/cockroach/compare/v2.0.2...v2.0.3) (2023-08-14)
 
 
