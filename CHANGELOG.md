@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/kustomhippie/cockroach/compare/v2.2.5...v2.3.0) (2024-05-27)
+
+
+### Features
+
+* **deps:** update quay.io/webhippie/alpine docker tag to v3.20 ([5cff6d6](https://github.com/kustomhippie/cockroach/commit/5cff6d65d46adf3a97543da72ccf7c9c7cafeb72))
+
 ## [2.2.5](https://github.com/kustomhippie/cockroach/compare/v2.2.4...v2.2.5) (2024-05-20)
 
 
