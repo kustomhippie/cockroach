@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.1](https://github.com/kustomhippie/cockroach/compare/v4.1.0...v4.1.1) (2025-06-16)
+
+
+### Bugfixes
+
+* **deps:** update cockroachdb/cockroach docker tag to v25.2.1 ([#84](https://github.com/kustomhippie/cockroach/issues/84)) ([977a17d](https://github.com/kustomhippie/cockroach/commit/977a17d19d197af19ab2b01b978dde8717da6719))
+
 ## [4.1.0](https://github.com/kustomhippie/cockroach/compare/v4.0.5...v4.1.0) (2025-06-02)
 
 
