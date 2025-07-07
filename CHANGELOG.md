@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.2.0](https://github.com/kustomhippie/cockroach/compare/v4.1.1...v4.2.0) (2025-07-07)
+
+
+### Features
+
+* **deps:** update quay.io/webhippie/alpine docker tag to v3.22 ([#86](https://github.com/kustomhippie/cockroach/issues/86)) ([83f7633](https://github.com/kustomhippie/cockroach/commit/83f763301a9954ba96f6105995bbb0d6cd6b2dbb))
+
+
+### Bugfixes
+
+* **deps:** update cockroachdb/cockroach docker tag to v25.2.2 ([#85](https://github.com/kustomhippie/cockroach/issues/85)) ([ce6fd10](https://github.com/kustomhippie/cockroach/commit/ce6fd10480385c072b8ad73d24be247a86293f38))
+
 ## [4.1.1](https://github.com/kustomhippie/cockroach/compare/v4.1.0...v4.1.1) (2025-06-16)
 
 
